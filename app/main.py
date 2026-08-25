@@ -4,7 +4,10 @@ import sys
 def main():
     while True:
         cmd = input('$ ')
-        handle_command(cmd)
+        if cmd != "exit":
+            handle_command(cmd)
+        else:
+            break
     
 def handle_command(cmd):
     print(f'{cmd}: command not found')
