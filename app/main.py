@@ -2,8 +2,12 @@ import sys
 
 
 def main():
-    sys.stdout.write("$ ")
+    while True:
+        cmd = input('$ ')
+        handle_command(cmd)
     
+def handle_command(cmd):
+    print(f'{cmd}: command not found')
 
 
 if __name__ == "__main__":
