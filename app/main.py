@@ -22,6 +22,8 @@ def handle_command(user_input):
         line = ' '.join(parts[1:])
         output = execute_type_command(line)
         print(output)
+    elif cmd == "pwd":
+        print(os.getcwd())
     elif is_executable(cmd):
         output = execute_arbitrary_command(user_input)
         print(output.stdout, end="")
@@ -37,6 +39,8 @@ def execute_type_command(line):
         output = "echo is a shell builtin"
     elif line == "type":
         output = "type is a shell builtin"
+    elif line == "pwd":
+        output = "pwd is a shell builtin"
     else:
         match = get_first_match_or_none(line)
         if match != None:
