@@ -2,8 +2,8 @@ from doctest import OutputChecker
 import os
 import subprocess
 
-from app.helpers import get_first_match_or_none, is_executable
-from app.execute_command import execute_arbitrary_command
+from app.helpers import is_executable
+from app.execute_command import execute_type_command, execute_arbitrary_command
 
 def main():
     while True:
@@ -31,25 +31,6 @@ def handle_command(user_input):
         print(output.stdout, end="")
     else:
         print(f'{user_input}: command not found')
-
-
-
-def execute_type_command(line):
-    if line == "exit":
-        output = "exit is a shell builtin"
-    elif line == "echo":
-        output = "echo is a shell builtin"
-    elif line == "type":
-        output = "type is a shell builtin"
-    elif line == "pwd":
-        output = "pwd is a shell builtin"
-    else:
-        match = get_first_match_or_none(line)
-        if match != None:
-            output = f"{line} is {match}"
-        else:
-            output = f"{line}: not found"
-    return output
 
 if __name__ == "__main__":
     main()
