@@ -24,8 +24,7 @@ def handle_command(user_input, shared_app):
         line = ' '.join(parts[1:])
         print(line)
     elif cmd == "type":
-        line = ' '.join(parts[1:])
-        output = execute_type_command(line)
+        output = execute_type_command(user_input)
         print(output)
     elif cmd == "pwd":
         output = execute_pwd_command(shared_app)

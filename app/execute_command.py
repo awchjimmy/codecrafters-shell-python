@@ -5,7 +5,9 @@ from pathlib import Path
 from app.helpers import get_first_match_or_none, is_executable
 
 
-def execute_type_command(line):
+def execute_type_command(user_input):
+    parts = user_input.split(' ')
+    line = ' '.join(parts[1:])
     if line == "exit":
         output = "exit is a shell builtin"
     elif line == "echo":
