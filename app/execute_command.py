@@ -1,7 +1,9 @@
 
 import subprocess
+from pathlib import Path
 
 from app.helpers import get_first_match_or_none, is_executable
+
 
 def execute_type_command(line):
     if line == "exit":
@@ -12,6 +14,8 @@ def execute_type_command(line):
         output = "type is a shell builtin"
     elif line == "pwd":
         output = "pwd is a shell builtin"
+    elif line == "cd":
+        output = "cd is a shell builtin"
     elif is_executable(line):
         match = get_first_match_or_none(line)
         output = f"{line} is {match}"
@@ -23,3 +27,14 @@ def execute_arbitrary_command(user_input):
     full_command = user_input.split(' ')
     output = subprocess.run(full_command, capture_output=True, text=True)
     return output
+
+def execute_pwd_command(shared_app):
+    return shared_app["current_dir"]
+
+def execute_cd_command(shared_app, user_input):
+    parts = user_input.split(' ')[1:]
+    dest = ' '.join(parts)
+    if Path(dest).exists():
+        shared_app["current_dir"] = dest
+    else:
+        print(f"cd: {dest}: No such file or directory")
