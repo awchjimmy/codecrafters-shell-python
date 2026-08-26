@@ -3,7 +3,7 @@ import os
 import subprocess
 
 from app.helpers import is_executable
-from app.execute_command import execute_type_command, execute_arbitrary_command, execute_pwd_command, execute_cd_command
+from app.execute_command import execute_echo_command, execute_type_command, execute_arbitrary_command, execute_pwd_command, execute_cd_command
 
 def main():
     shared_app = {
@@ -21,8 +21,8 @@ def handle_command(user_input, shared_app):
     cmd = parts[0]
 
     if cmd == "echo":
-        line = ' '.join(parts[1:])
-        print(line)
+        output = execute_echo_command(user_input)
+        print(output)
     elif cmd == "type":
         output = execute_type_command(user_input)
         print(output)

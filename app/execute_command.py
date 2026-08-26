@@ -4,6 +4,10 @@ from pathlib import Path
 
 from app.helpers import get_first_match_or_none, is_executable
 
+def execute_echo_command(user_input):
+    parts = user_input.split(' ')
+    output = ' '.join(parts[1:])
+    return output
 
 def execute_type_command(user_input):
     parts = user_input.split(' ')
