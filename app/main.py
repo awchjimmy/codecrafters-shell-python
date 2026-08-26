@@ -1,4 +1,5 @@
-import sys
+from doctest import OutputChecker
+import os
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
             handle_command(user_input)
         else:
             break
-    
+
 def handle_command(user_input):
     parts = user_input.split(' ')
     cmd = parts[0]
@@ -34,8 +35,26 @@ def execute_type_command(line):
     elif line == "type":
         output = "type is a shell builtin"
     else:
-        output = f"{line}: not found"
+        match = get_first_match_or_none(line)
+        if match != None:
+            output = f"{line} is {match}"
+        else:
+            output = f"{line}: not found"
     return output
+
+def get_first_match_or_none(line):
+    found = False
+    output = ""
+    paths = os.environ["PATH"].split(os.pathsep)
+    for path in paths:
+        full = f"{path}{os.sep}{line}"
+        if os.access(full, os.X_OK):
+            found = True
+            output = full
+    if found:
+        return output
+    else:
+        return None
 
 
 if __name__ == "__main__":
